@@ -129,28 +129,36 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-    public function actionSay($message = 'hello'){
-        return $this->render('say',['message'=>$message]);
+    public function actionSay($message = "hello"){
+        return $this->render('say',['message'=> $message]);
     }
 
-    public function actionEntry()
-    {
-        $model = new EntryForm();
-//        $model->name = 'Qiang';
-//        $model->email = 'bad';
-//        if ($model->validate()) {
-//            // 验证成功！
+//    public function actionEntry()
+//    {
+//        $model = new EntryForm();
+////        $model->name = 'Qiang';
+////        $model->email = 'bad';
+////        if ($model->validate()) {
+////            // 验证成功！
+////        } else {
+////            // 失败！
+////            // 使用 $model->getErrors() 获取错误详情
+////        }
+//        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+//            return $this->render('entry-confirm', ['model' => $model]);
 //        } else {
-//            // 失败！
-//            // 使用 $model->getErrors() 获取错误详情
+//            return $this->render('entry', ['model' => $model]);
 //        }
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            return $this->render('entry-confirm', ['model' => $model]);
-        } else {
-            return $this->render('entry', ['model' => $model]);
+//    }
+
+    public function actionEntry(){
+        $model = new EntryForm();
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            return $this->render('entry-confirm',['model'=>$model]);
+        }else{
+            return $this->render('entry',['model'=>$model]);
         }
     }
-
 
 
 
